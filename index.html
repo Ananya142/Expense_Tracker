@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <h1>💸 Expense Tracker</h1>
+    
+    <select id="type">
+        <option value="" disabled selected>Select Type</option>
+        <option value="expense">Expense</option>
+        <option value="income">Income</option>
+    </Select>
+     
+      <input type="text" id="desc" placeholder="Description" />
+    <input type="number" id="amount" placeholder="Amount" />
+    <input type="date" id="date" />
+    <button id="clear" onclick="clearAll()">Clear All</button>
+    <button id="sort" onclick="sortTransactions()">Sort</button>
+
+    
+    <button onclick="addTransaction()">Add Expense</button>
+    <p id="error" class="error"></p>
+
+    <h2>Total: ₹<span id="total">0.00</span></h2>
+    <ul id="list"></ul>
+
+    <script src="script.js"></script>
+  </div>
+</body>
+</html>
