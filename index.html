@@ -6,29 +6,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Expense Tracker</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="app">
     <h1>💸 Expense Tracker</h1>
     
-    <select id="type">
-        <option value="" disabled selected>Select Type</option>
-        <option value="expense">Expense</option>
-        <option value="income">Income</option>
-    </Select>
-     
-      <input type="text" id="desc" placeholder="Description" />
-    <input type="number" id="amount" placeholder="Amount" />
-    <input type="date" id="date" />
-    <button id="clear" onclick="clearAll()">Clear All</button>
-    <button id="sort" onclick="sortTransactions()">Sort</button>
-
+    <form id="transaction-form" class="transaction-form">
+      <div class="form-row">
+        <div class="form-group">
+          <select id="type" required>
+            <option value="" disabled selected>Type</option>
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <select id="category" required>
+            <option value="" disabled selected>Category</option>
+            <option value="food">Food & Dining</option>
+            <option value="transport">Transportation</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="shopping">Shopping</option>
+            <option value="bills">Bills & Utilities</option>
+            <option value="health">Health & Fitness</option>
+            <option value="education">Education</option>
+            <option value="salary">Salary</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <input type="text" id="desc" placeholder="Description" required />
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <input type="number" id="amount" placeholder="Amount" min="0.01" step="0.01" required />
+        </div>
+        
+        <div class="form-group">
+          <input type="date" id="date" required />
+        </div>
+      </div>
+      
+      <div class="form-actions">
+        <button type="button" id="clear" onclick="clearAll()">Clear All</button>
+        <button type="button" id="sort" onclick="sortTransactions()">Sort by Date</button>
+        <button type="submit">Add Transaction</button>
+      </div>
+    </form>
     
-    <button onclick="addTransaction()">Add Expense</button>
     <p id="error" class="error"></p>
 
-    <h2>Total: ₹<span id="total">0.00</span></h2>
-    <ul id="list"></ul>
+    <div class="summary">
+      <h2>Total Balance: ₹<span id="total">0.00</span></h2>
+      <div class="monthly-summary">
+        <h3>This Month</h3>
+        <p>Income: ₹<span id="monthly-income">0.00</span></p>
+        <p>Expenses: ₹<span id="monthly-expenses">0.00</span></p>
+        <p>Net: ₹<span id="monthly-net">0.00</span></p>
+      </div>
+    </div>
+    
+    <div class="filters">
+      <input type="text" id="search" placeholder="Search transactions..." />
+      <select id="filter-type">
+        <option value="">All Types</option>
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </select>
+      <select id="filter-category">
+        <option value="">All Categories</option>
+        <option value="food">Food & Dining</option>
+        <option value="transport">Transportation</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="shopping">Shopping</option>
+        <option value="bills">Bills & Utilities</option>
+        <option value="health">Health & Fitness</option>
+        <option value="education">Education</option>
+        <option value="salary">Salary</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    
+    <div class="chart-container">
+      <h3>Expense Breakdown</h3>
+      <canvas id="expenseChart"></canvas>
+    </div>
+    
+    <ul id="list" class="transaction-list"></ul>
 
     <script src="script.js"></script>
   </div>
